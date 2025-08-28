@@ -1,28 +1,37 @@
 import { ScrollView, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import { useRouter } from 'expo-router';
+
+const quizCategories = [
+  { id: 1, name: 'General Knowledge', questions: 10, color: '#FF6B6B' },
+  { id: 2, name: 'Science', questions: 15, color: '#4ECDC4' },
+  { id: 3, name: 'History', questions: 12, color: '#45B7D1' },
+  { id: 4, name: 'Sports', questions: 8, color: '#96CEB4' },
+  { id: 5, name: 'Geography', questions: 10, color: '#FECA57' },
+  { id: 6, name: 'Movies', questions: 12, color: '#FF9FF3' },
+];
 
 const HomeScreen = () => {
+   const router = useRouter();
+   
+   const startQuiz = (category) => {
+      router.push({
+            pathname: '/quiz',
+            params: { category: category.name }
+      });
+    }
+
+
   return (
     <ScrollView style={styles.container}>
-       <View style={styles.header}>
-        <Text style={styles.category}>category</Text>
-          <Text style={styles.progress}>  Question 1 of 5</Text>
-       </View>
-
-       <View style={styles.questionContainer}>
-          <Text style={styles.question}> what is your name ?</Text>
-       </View>
-
-         <View style={styles.optionsContainer}>
-            <Text style={styles.option}>option 1</Text>
-            <Text style={styles.option}>option 2</Text>
-            <Text style={styles.option}>option 3</Text>
-            <Text style={styles.option}>option 4</Text>
+         <View style={styles.header}>
+            <Text style={styles.title}>Quiz App</Text>
+            <Text style={styles.subtitle}>Choose a category to start</Text>
          </View>
 
-         <View style={styles.scoreContainer}>
-            <Text style={styles.score}>Score : 0</Text>
-         </View>
+            <View style={styles.categoriesContainer}>
+
+            </View>
     </ScrollView>
   )
 }
@@ -30,71 +39,54 @@ const HomeScreen = () => {
 export default HomeScreen;
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#f5f5f5',
-        padding: 20,
-    },
-    header:{
-        marginTop:40,
-        marginBottom:30,
-    },
-    category:{
-        fontSize:24,
-        color:'#333',
-        fontWeight: 'bold',
-       textAlign:'center'
-    },
-    progress:{
-        fontSize:16,
-        color:'#666',
-        textAlign:'center',
-        marginTop:5,
-    },
-    questionContainer:{
-        marginBottom:30,
-        backgroundColor:'#fff',
-        padding:20,
-        borderRadius:10,
-        shadowColor:'#000',
-        shadowOffset:{width:0,height:2},
-        shadowOpacity:0.1,
-        shadowRadius:4,
-    },
-    question:{
-        fontSize:20,
-        color:'#333',
-        fontWeight:'600',
-        textAlign:'center'
-    },
-    optionsContainer:{
-        marginBottom:30,
-    },
-    option:{
-        backgroundColor:'#fff',
-        padding:15,
-        borderRadius:10,
-        marginBottom:10,
-        fontSize:18,
-        color:'#333',
-        textAlign:'center',
-        elevation:2,
-        shadowColor:'#000',
-        shadowOffset:{width:0,height:1},
-        shadowOpacity:0.1,
-        shadowRadius:2,
-    },
-    optionText:{
-        fontSize:16,    
-        color:'#333',
-        textAlign:'center'
-    },
-    scoreContainer:{
-        alignItems:'center',
-    },
-    score:{
-        fontSize:18,
-        color:'#333',
-        fontWeight:'600',
-    }
-})
+  container: {
+    flex: 1,
+    backgroundColor: '#f5f5f5',
+  },
+  header: {
+    padding: 20,
+    backgroundColor: '#fff',
+    marginBottom: 20,
+    elevation: 3,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+  },
+  title: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    color: '#333',
+    textAlign: 'center',
+  },
+  subtitle: {
+    fontSize: 16,
+    color: '#666',
+    textAlign: 'center',
+    marginTop: 5,
+  },
+  categoriesContainer: {
+    paddingHorizontal: 20,
+  },
+  categoryCard: {
+    padding: 20,
+    borderRadius: 15,
+    marginBottom: 15,
+    elevation: 3,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+  },
+  categoryName: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#fff',
+    marginBottom: 5,
+  },
+  categoryQuestions: {
+    fontSize: 14,
+    color: '#fff',
+    opacity: 0.9,
+  },
+});
