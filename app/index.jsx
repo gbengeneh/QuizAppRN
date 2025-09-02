@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, Text, View } from 'react-native'
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { useRouter } from 'expo-router';
 
@@ -9,6 +9,7 @@ const quizCategories = [
   { id: 4, name: 'Sports', questions: 8, color: '#96CEB4' },
   { id: 5, name: 'Geography', questions: 10, color: '#FECA57' },
   { id: 6, name: 'Movies', questions: 12, color: '#FF9FF3' },
+
 ];
 
 const HomeScreen = () => {
@@ -30,7 +31,16 @@ const HomeScreen = () => {
          </View>
 
             <View style={styles.categoriesContainer}>
-
+                 {quizCategories.map((category)=> (
+                  <TouchableOpacity
+                  key={category.id}
+                  style={[styles.categoryCard, { backgroundColor: category.color }]}
+                  onPress={() => startQuiz(category)}
+                  >
+                    <Text style={styles.categoryName}>{category.name}</Text>
+                    <Text style={styles.categoryQuestions}>{category.questions} Questions</Text>
+                  </TouchableOpacity>
+                 ))}
             </View>
     </ScrollView>
   )
@@ -42,6 +52,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f5f5f5',
+    paddingTop: 50,
   },
   header: {
     padding: 20,
